@@ -12,12 +12,12 @@
     'license': 'LGPL-3',
     'images': ['static/description/Two-Factor-Authenticaton.png'],
     'version': '1.1',
-    'depends': ['base','allip_base'],
+    'depends': ['base', 'allip_base'],
     'data': [
         'security/ir.model.access.csv',
         'views/configuration.xml',
         'views/template.xml',
         'views/res_users.xml',
     ],
-   
+
 }
