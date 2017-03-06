@@ -16,27 +16,12 @@
             </field>
           </record>
 
-        <record id="digits_configuration_action" model="ir.actions.server">
-            <field name="name">Configuration</field>
-            <field name="condition">True</field>
-            <field name="type">ir.actions.server</field>
-            <field name="model_id" ref="model_digits_configuration" />
-            <field name="code">
-configIdObj = env['digits.configuration'].search([])
-if configIdObj:
-	action = {
-               	 		"type": "ir.actions.act_window",
-             	   		"view_mode": "form",
-             	   		"res_model": "digits.configuration",
-             	   		"res_id": configIdObj[0].id,
-           		 	}
-else:
-					action = {
-               	 		"type": "ir.actions.act_window",
-             	   		"view_mode": "form",
-             	   		"res_model": "digits.configuration",
-           		 }
-
+        <record id="digits_configuration_action" model="ir.actions.act_window">
+            <field name="name">2FA Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="res_model">digits.configuration</field>
+            <field name="view_mode">tree,form</field>
             </field>
         </record>
 
