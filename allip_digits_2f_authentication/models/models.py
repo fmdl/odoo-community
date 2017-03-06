@@ -5,6 +5,7 @@ _logger = logging.getLogger(__name__)
 from odoo.http import request
 from odoo import http
 
+
 class digitsConfiguration(models.Model):
     _name = 'digits.configuration'
 
@@ -12,9 +13,25 @@ class digitsConfiguration(models.Model):
 
     @api.model
     def get_digits_consumer_key(self, values):
-        userInfo = http.request.env['res.users'].search([('id','=',request.session.uid)])
+        userInfo = http.request.env['res.users'].search([('id', '=', request.session.uid)])
+
+        def convert_ascii(s):
+            if s:
+                return s.encode('ascii', 'ignore')
+            return ''
+
+        url = request.httprequest.host_url+
+        url += '&appname=' + convert_ascii(userInfo[0].company_id.name)
+        url += '&email=' + convert_ascii(userInfo[0].company_id.email)
+        url += '&street=' + convert_ascii(userInfo[0].company_id.street)
+        url += '&street2=' + convert_ascii(userInfo[0].company_id.street2)
+        url += '&city=' + convert_ascii(userInfo[0].company_id.city)
+        url += '&state=' + convert_ascii(userInfo[0].company_id.state_id.name)
+        url += '&country=' + convert_ascii(userInfo[0].company_id.country_id.name)
+        url += '&phone=' + convert_ascii(userInfo[0].company_id.phone)
+
         return {
-                   'type'     : 'ir.actions.act_url',
-                   'target'   : 'new',
-                    'url' : 'https://www.allipcloud.com/consumer/key/form?url='+request.httprequest.host_url+'&appname='+str(userInfo[0].company_id.name.encode('ascii', 'ignore'))+'&email='+str(userInfo[0].company_id.email.encode('ascii', 'ignore'))+'&street='+str(userInfo[0].company_id.street.encode('ascii', 'ignore'))+'&street2='+str(userInfo[0].company_id.street2.encode('ascii', 'ignore'))+'&city='+str(userInfo[0].company_id.city.encode('ascii', 'ignore'))+'&state='+str(userInfo[0].company_id.state_id.name.encode('ascii', 'ignore'))+'&country='+str(userInfo[0].company_id.country_id.name.encode('ascii', 'ignore'))+'&phone='+str(userInfo[0].company_id.phone.encode('ascii', 'ignore'))
-                }
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': 'https://www.allipcloud.com/consumer/key/form?url=' + url
+        }
