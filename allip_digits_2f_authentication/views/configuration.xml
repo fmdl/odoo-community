@@ -5,16 +5,16 @@
             <field name="name">digits.configuration.form</field>
             <field name="model">digits.configuration</field>
             <field name="arch" type="xml">
-                <form string="Configuration" create="false" >
+                <form string="Configuration" create="false">
                     <sheet>
                         <group>
                             <field name="digits_consumer_key"/>
-                         	 <button name="get_digits_consumer_key" string="Request Digits Consumer Key" type="object" />
+                            <button name="get_digits_consumer_key" string="Request Digits Consumer Key" type="object"/>
                         </group>
                     </sheet>
                 </form>
             </field>
-          </record>
+        </record>
 
         <record id="digits_configuration_action" model="ir.actions.act_window">
             <field name="name">2FA Configuration</field>
@@ -22,10 +22,9 @@
             <field name="view_mode">form</field>
             <field name="res_model">digits.configuration</field>
             <field name="view_mode">tree,form</field>
-            </field>
         </record>
 
-		<menuitem name="2FA Configuration" id="digits_configuration" parent="allip_base.allip_main_menu" action="digits_configuration_action"/>
+        <menuitem name="2FA Configuration" id="digits_configuration" parent="allip_base.allip_main_menu" action="digits_configuration_action"/>
 
     </data>
 </odoo>
