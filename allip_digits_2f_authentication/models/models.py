@@ -20,7 +20,7 @@ class digitsConfiguration(models.Model):
                 return s.encode('ascii', 'ignore')
             return ''
 
-        url = request.httprequest.host_url+
+        url = request.httprequest.host_url
         url += '&appname=' + convert_ascii(userInfo[0].company_id.name)
         url += '&email=' + convert_ascii(userInfo[0].company_id.email)
         url += '&street=' + convert_ascii(userInfo[0].company_id.street)
